@@ -1,22 +1,30 @@
 <script lang="ts">
-  import { Page } from "../pages/memo/pageMemo";
+  import { onDestroy, onMount, tick } from "svelte";
+  import { memoPages } from "../pages/memo/memo.svelte";
 
   import classNames from "classnames/bind";
   import style from "./style.module.scss";
   const cx = classNames.bind(style);
 
   let { children } = $props();
+
+  let node: HTMLElement | null = null;
+
+  onMount(async () => {
+    await tick();
+
+    if (node) {
+      memoPages.mount("page1", node);
+    }
+  });
+
+  onDestroy(() => {
+    memoPages.destroy("page1");
+  });
 </script>
 
-{#snippet memo()}
-  {#each Page as Memo, idx (idx)}
-    <Memo></Memo>
-  {/each}
-{/snippet}
-
 <div class={cx("main")}>
-  {@render memo()}
-  <div>
+  <div bind:this={node}>
     <div>layout</div>
     <div>
       {@render children()}

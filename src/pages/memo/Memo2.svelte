@@ -2,7 +2,7 @@
   let cnt = $state(0);
 </script>
 
-<div>memo1</div>
+<div>memo2</div>
 <div>count : {cnt}</div>
 
 <button

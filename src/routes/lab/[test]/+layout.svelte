@@ -1,15 +1,7 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import type { PageData } from "./$types";
-
-  type Props = {
-    data: PageData;
-  };
-  let { data }: Props = $props();
-
-  onMount(() => {
-    console.log(data);
-  });
+  let { children } = $props();
 </script>
 
-<div>test page</div>
+<div>
+  {@render children()}
+</div>
